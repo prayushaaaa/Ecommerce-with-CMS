@@ -41,7 +41,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     const title = initialData ? "Edit billboard" : "Create Billboard";
     const description = initialData ? "Edit a billboard" : "Add a new Billboard";
     const toastMessage = initialData ? "Billboard Updated" : "Billboard Created.";
-    const action = initialData ? "Save Changed" : "Create";
+    const action = initialData ? "Save Changes" : "Create";
 
     const form = useForm<BillboardFormValues>({
         resolver: zodResolver(formSchema),
@@ -60,6 +60,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             else {
                 await axios.post(`/api/${params.storeId}/billboards`, data);
             }
+            router.push(`/${params.storeId}/billboards`);
             router.refresh();
             toast.success(toastMessage);
         } catch (error) {
@@ -75,9 +76,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             setLoading(true);
             await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
 
-            router.push("/");
+            router.push(`/${params.storeId}/billboards`);
             router.refresh();
-            toast.success("Store Deleted");
+            toast.success("Billboard Deleted");
 
         } catch (error) {
             toast.error("Make sure there are no active products and categories in this billboard.")
@@ -86,7 +87,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             setLoading(false);
             setOpen(false);
         }
-    }
+    };
 
     return (
         <>
@@ -157,12 +158,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                     </Button>
                 </form>
             </Form>
-            <Separator />
         </>
 
     );
 };
 
 export default BillboardForm;
-
-//git test
