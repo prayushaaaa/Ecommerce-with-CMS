@@ -52,7 +52,7 @@ export async function PATCH(
             return new NextResponse("Billboard id is required", { status: 400 });
         }
 
-        const storeByUserId = await prisma?.store.findFirst({
+        const storeByUserId = await prismadb.store.findFirst({
             where: {
                 id: params.storeId,
                 userId
@@ -97,7 +97,7 @@ export async function DELETE(
             return new NextResponse("BIllboard id is required", { status: 400 });
         }
 
-        const storeByUserId = await prisma?.store.findFirst({
+        const storeByUserId = await prismadb.store.findFirst({
             where: {
                 id: params.storeId,
                 userId
