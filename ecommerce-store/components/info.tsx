@@ -44,7 +44,6 @@ const Info: React.FC<InfoProps> = ({
                     Add To Cart
                     <ShoppingCart />
                 </Button>
-
             </div>
         </div>
     );
