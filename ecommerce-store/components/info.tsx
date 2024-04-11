@@ -47,6 +47,6 @@ const Info: React.FC<InfoProps> = ({
             </div>
         </div>
     );
-}
+};
 
 export default Info;
