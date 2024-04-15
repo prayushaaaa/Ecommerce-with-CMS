@@ -1,3 +1,8 @@
+export interface Store {
+    id: String;
+    name: String;
+};
+
 export interface Billboard {
     id: string;
     label: string;
