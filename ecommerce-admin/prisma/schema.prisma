@@ -141,3 +141,13 @@ model OrderItem {
   @@index([orderId])
   @@index([productId])
 }
+
+model kpi {
+  id                 String @id @default(uuid()) @map("_id")
+  totalProfit        String
+  totalRevenue       String
+  totalExpenses      String
+  monthlyData        String
+  dailyData          String
+  expensesByCategory String
+}
