@@ -1,5 +1,6 @@
 export const kpiData = [
   {
+
     _id: "63bf8239f03239e002001612",
     totalProfit: " 212000.00",
     totalRevenue: " 283000.00",
