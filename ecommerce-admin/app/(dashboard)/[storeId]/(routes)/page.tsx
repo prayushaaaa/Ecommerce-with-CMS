@@ -1,7 +1,6 @@
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 import { getSalesCount } from "@/actions/get-sales-count";
 import { getStockCount } from "@/actions/get-stock-count";
-import { insertData } from "@/actions/insert-data";
 import { getTotalRevenue } from "@/actions/get-total-revenue";
 import { Overview } from "@/components/overview";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
