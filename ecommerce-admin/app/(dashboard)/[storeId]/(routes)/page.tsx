@@ -9,6 +9,7 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { formatter } from "@/lib/utils";
 import { CreditCard, DollarSign, PackageIcon } from "lucide-react";
+import StorePrediction from "@/components/store-prediction";
 
 interface DashboardPageProps {
     params: { storeId: string }
@@ -24,7 +25,6 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({
     const stockCount = await getStockCount(params.storeId);
     const graphRevenue = await getGraphRevenue(params.storeId);
     // const data = await insertData();
-
 
     return (
         <>
@@ -81,6 +81,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({
                             <Overview data={graphRevenue} />
                         </CardContent>
                     </Card>
+                    <StorePrediction storeId={params.storeId} revenueInfo={graphRevenue} />
                 </div>
             </div>
         </>

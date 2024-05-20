@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
-import { kpiData } from '../../../../../../../index'
+import { getGraphRevenue } from '@/actions/get-graph-revenue';
 import React, { useState, useMemo } from 'react'
 import {
     CartesianGrid,
@@ -17,29 +17,46 @@ import {
     YAxis,
 } from "recharts";
 import regression, { DataPoint } from "regression";
+import { JsonArray } from '@prisma/client/runtime/library';
 
-const PredictionClient = () => {
+interface StorePredictionProps {
+    storeId: string;
+    revenueInfo: Array<any>;
+}
+
+const StorePrediction: React.FC<StorePredictionProps> = ({ storeId, revenueInfo }) => {
     const [isPredictions, setIsPredictions] = useState(false);
+
+    const monthToIndex: { [key: string]: number } = {
+        'Jan': 0,
+        'Feb': 1,
+        'Mar': 2,
+        'Apr': 3,
+        'May': 4,
+        'Jun': 5,
+        'Jul': 6,
+        'Aug': 7,
+        'Sep': 8,
+        'Oct': 9,
+        'Nov': 10,
+        'Dec': 11
+    };
+
+    let kpiData: Array<[number, number]> = [];
+
+    revenueInfo.map(item => {
+        kpiData.push([monthToIndex[item.name], item.total]);
+    });
 
     const formattedData = useMemo(() => {
         if (!kpiData) return [];
-        const monthData = kpiData[0].monthlyData;
 
-        const formatted: Array<DataPoint> = monthData.map(
-            ({ revenue }: any, i: number) => {
-                return [i, parseFloat(revenue)];
-            }
-        );
+        const regressionLine = regression.linear(kpiData);
 
-        console.log(formatted);
-
-
-        const regressionLine = regression.linear(formatted);
-
-        return monthData.map(({ month, revenue }, i: number) => {
+        return revenueInfo.map(({ name, total }, i: number) => {
             return {
-                name: month,
-                "Actual Revenue": revenue,
+                name: name,
+                "Actual Revenue": total,
                 "Regression Line": regressionLine.points[i][1],
                 "Predicted Revenue": regressionLine.predict(i + 12)[1],
             };
@@ -114,4 +131,4 @@ const PredictionClient = () => {
     )
 }
 
-export default PredictionClient;
+export default StorePrediction;
