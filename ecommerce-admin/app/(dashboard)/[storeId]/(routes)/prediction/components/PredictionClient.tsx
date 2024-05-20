@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
-import { kpiData } from '../../../../../../../index'
+import { kpiData } from '@/index';
 import React, { useState, useMemo } from 'react'
 import {
     CartesianGrid,
