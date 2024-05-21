@@ -23,7 +23,6 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({
     const salesCount = await getSalesCount(params.storeId);
     const stockCount = await getStockCount(params.storeId);
     const graphRevenue = await getGraphRevenue(params.storeId);
-    // const data = await insertData();
 
     return (
         <>
